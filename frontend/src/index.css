@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@layer base{
+    body{
+        @apply bg-navy
+    }
+    .center{
+        @apply flex flex-col items-center justify-center
+    }
+    
+    .glowing-border {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .glowing-border::after{
+        content: "";
+        width: calc(100% + 5px);
+        height: calc(100% + 5px);
+        background-image: inherit;
+        border-radius: inherit;
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        z-index: 1;
+        opacity: 0.8;
+        filter: blur(50px);
+        z-index: -1;
+    }
+      
+
+    .navy-gradient {
+        background: radial-gradient(circle at 15% 60%, #3d49eb2e 0%, #0c081300 30%,transparent 100%),
+              radial-gradient(circle at 90% 30%, #3d49eb2e 0%, #0c0813f2 30%, transparent 100%);
+    }
+
+    .iphone{
+        z-index: 1;
+
+        &::after{
+            content: "";
+            width: calc(100% + 2.6rem);
+            height: calc(100% + 2.6rem);
+            border-radius: 3rem;
+            padding: 1px;
+            border: 2px solid white;
+            position: absolute;
+            top: -1.3rem;
+            left: -1.3rem;
+            z-index: -1;
+        }
+    }
+
+    .tile {
+        border-radius: 0px;
+        @apply rounded-none relative overflow-hidden bg-charcoal;
+        
+        &:hover::after {
+            /* background-image: conic-gradient(from 0deg, #3D4AEB 0%, #1E246A 40%, #1E246A 70%, transparent 100%); */
+            background-image: conic-gradient(
+                from 0deg,
+                #FF3C38 0%,
+                #FFD700 20%,
+                #1E90FF 40%,
+                #FF00FF 60%,
+                #00FFFF 80%,
+                transparent 90%,
+                #FF3C38 100%
+            );
+            
+            @apply absolute h-[150%] w-[150%]  left-[-25%] top-[-25%] content-[''] animate-wiggle z-[-1];
+        }
+    }
+
+    .playing-player {
+        border-radius: 0px;
+        @apply rounded-none relative overflow-hidden bg-charcoal;
+        
+        &::after {
+            /* background-image: conic-gradient(from 0deg, #3D4AEB 0%, #1E246A 40%, #1E246A 70%, transparent 100%); */
+            background-image: conic-gradient(
+                from 0deg,
+                #FF3C38 0%,
+                #FFD700 20%,
+                #1E90FF 40%,
+                #FF00FF 60%,
+                #00FFFF 80%,
+                transparent 90%,
+                #FF3C38 100%
+            );
+            
+            @apply absolute h-[150%] w-[150%]  left-[-25%] top-[-25%] content-[''] animate-wiggle z-[-1];
+        }
+    }
+    .searching-player {
+        border-radius: 0px;
+        @apply rounded-none relative overflow-hidden bg-charcoal;
+        
+        &::after {
+            /* background-image: conic-gradient(from 0deg, #3D4AEB 0%, #1E246A 40%, #1E246A 70%, transparent 100%); */
+            background-image: conic-gradient(
+                from 0deg,
+                #1E90FF 0%,
+                #00FFFF 20%,
+                #00FFFF 80%,
+                #4389f1 60%,
+                #4ca5ff 40%,
+                transparent 90%,
+                #005af6 100%
+            );
+            
+            @apply absolute h-[150%] w-[150%]  left-[-25%] top-[-25%] content-[''] animate-wiggle z-[-1];
+        }
+    }
+    .last-canceled {
+        border-radius: 0px;
+        @apply rounded-none relative overflow-hidden bg-charcoal;
+        
+        &::after {
+            /* background-image: conic-gradient(from 0deg, #3D4AEB 0%, #1E246A 40%, #1E246A 70%, transparent 100%); */
+            background-image: conic-gradient(
+                from 0deg,
+                #1E90FF 0%,
+                #00FFFF 20%,
+                #1E90FF 40%,
+                #000dff 60%,
+                #00FFFF 80%,
+                transparent 90%,
+                #005af6 100%
+            );
+            @apply absolute h-[150%] w-[150%]  left-[-25%] top-[-25%] content-[''] animate-wiggle-finite z-[-1];
+        }
+    }
+    .uncancel-tile {
+        border-radius: 0px;
+        @apply rounded-none relative overflow-hidden bg-charcoal;
+
+        &:hover:after{
+            /* background-image: conic-gradient(from 0deg, #3D4AEB 0%, #1E246A 40%, #1E246A 70%, transparent 100%); */
+            background-image: conic-gradient(
+                from 0deg,
+                #1E90FF 0%,
+                #00FFFF 20%,
+                #1E90FF 40%,
+                #000dff 60%,
+                #00FFFF 80%,
+                transparent 90%,
+                #005af6 100%
+            );
+            @apply absolute h-[150%] w-[150%]  left-[-25%] top-[-25%] content-[''] animate-wiggle z-[-1];
+        }
+    }
+
+
+    
+}
+
+/* globals.css */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, and Opera */
+}
+/* width */
+::-webkit-scrollbar {
+	width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+@layer utilities {
+	.custom-scrollbar::-webkit-scrollbar {
+		width: 2px; /* Super thin scrollbar */
+	}
+	.custom-scrollbar::-webkit-scrollbar-track {
+		background: transparent; /* Track color */
+	}
+	.custom-scrollbar::-webkit-scrollbar-thumb {
+		background: rgba(100, 100, 100, 0.5); /* Scrollbar color */
+		border-radius: 10px; /* Rounded edges */
+	}
+	.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+		background: rgba(100, 100, 100, 0.7); /* Darker on hover */
+	}
+}
+
+@theme {
+    --color-navy: #0C0813;
+    --color-charcoal: #373855;
+    --color-navyblue: #3D4AEB;
+    --color-spicered: #B15653;
+
+    --animate-wiggle: border-spin 3s linear infinite;
+    --animate-wiggle-finite: border-spin 3s linear 2;
+    --animate-hide: hide-item 6s linear 1;
+
+    @keyframes border-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+}
+
+
