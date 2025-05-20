@@ -4,14 +4,11 @@ import useUserStore from "../store/userstore";
 import googleIcon from "../assets/google.svg"
 import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/Popover";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useGameSocketStore } from "../store/gameSocketStore";
+import ActiveUsers from "../components/ActiveUsers";
 
 export default function Home() {
   const navigate = useNavigate()
-  const { addListener, removeListener, isConnected } = useGameSocketStore();
   const {isVerifying, user} = useUserStore();
-  const [activeUsers, setActiveUsers] = useState<number>(1)
 
   const handelPlayGame = () => {
     navigate("/playwithai")
@@ -19,22 +16,6 @@ export default function Home() {
   const handleLoginWithGoogle = () => {
     window.location.href = "http://localhost:8080/auth/google"
   }
-
-  useEffect(() => {
-      const handleMessage = (event: MessageEvent) => {
-        const message = JSON.parse(event.data);
-        console.log(message)
-        if(message.type === "user_count"){
-          setActiveUsers(message.payload.count);
-        } 
-      }
-  
-      addListener(handleMessage)
-    
-      return () => {
-        removeListener(handleMessage)
-      }
-    }, [addListener, removeListener])
 
 
   return (
@@ -51,23 +32,14 @@ export default function Home() {
               <button className=" w-[120px] rounded-xl h-[38px] bg-charcoal/80 text-white">Logout</button>
             </PopoverContent>
           </Popover>}
-        {isConnected && 
-        <div className=" absolute top-4 left-4 flex items-center justify-center gap-2 ">
-            <div className="relative inline-flex items-center">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-              <span className="ml-2 text-sm text-gray-200">{activeUsers} Active</span>
-            </div>
-        </div>}
+        <ActiveUsers className=" absolute top-4 left-4" />
         <div className=" grow center gap-4 justify-between">
           <div className=" w-full h-full  center ">
             <Board />
           </div>
-          <h1 className=" text-6xl font-bold">Bingo Master</h1>
+          <h1 className=" text-5xl md:text-6xl font-bold">Bingo Master</h1>
           {user && <p> Welcome {user.name }</p>}
-          <p className=" text-center text-md text-white/50 grow">Let's play the bingo which is not fully based on luck but you have the numbers in your hand to carve your luck</p>
+          <p className=" text-sm md:text-base text-center text-md  text-white/50 grow">Let's play the bingo which is not fully based on luck but you have the numbers in your hand to carve your luck</p>
         </div>
         {user === null ? 
           <button 

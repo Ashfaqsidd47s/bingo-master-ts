@@ -128,10 +128,10 @@ wss.on("connection", async function connection(ws, req) {
     
     ws.on("message", async (data)=> {
         const message = JSON.parse(data.toString());
-        console.log(" message recieved :", message)
+        // console.log(" message recieved :", message)
     })
     ws.on("close", async ()=> {
-        console.log("socket closing...")
+        // console.log("socket closing...")
         count--;
         // if the otheruser has alredy left the game then destroy the game and user user as well 
         user.destroy();

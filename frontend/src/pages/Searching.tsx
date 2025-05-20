@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "../components/ui/Dialog";
 import useGameStore from "../store/gameStore";
 import useUserStore from "../store/userstore";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import SearchingAnimation from "../components/SearchingAnimation";
 import  {motion, Variants } from "framer-motion"
 import { useGameSocketStore } from "../store/gameSocketStore";
+import { toast } from "sonner";
+import { ArrowLeft } from "lucide-react";
+import ActiveUsers from "../components/ActiveUsers";
+
 
 export default function Searching() {
   const navigate = useNavigate();
@@ -23,6 +27,10 @@ export default function Searching() {
       }))
       setIsSearching(true);
     }
+  }
+
+  const handleWorkInprogress = () => {
+    toast.warning("This feature is still under development...", { position: "top-right"})
   }
 
   useEffect(() => {
@@ -91,7 +99,11 @@ export default function Searching() {
 
   return (
     <div className="w-screen h-[100svh] center gap-4 p-6 pb-8 bg-navy text-white bg-radial-[at_35%_20%] from-navyblue/50 via-navy  to-transparent">
-      <div className="w-[100px] flex flex-col gap-2 items-center relative">
+      <NavLink to="/" className=" absolute top-4 left-6 bg-white/10 hover:bg-white/15 text-navy center  rounded-full p-2 cursor-pointer">
+        <ArrowLeft className=" w-8 h-8" />
+      </NavLink>
+      <ActiveUsers className=" absolute top-4 right-4" />
+      <div className="w-[100px] flex flex-col gap-2 items-center relative ">
         <div className={` w-[70px] h-[70px] center rounded-full overflow-hidden bg-charcoal z-0 `}>
           <div className=" w-[67px] h-[67px] rounded-full bg-navy">
             <img src="https://avatar.iran.liara.run/public/17" alt="" />
@@ -161,9 +173,11 @@ export default function Searching() {
         </DialogContent>
       </Dialog>
       <button
+        onClick={handleWorkInprogress}
         className=" w-[220px] h-[50px] rounded-2xl bg-charcoal text-white hover:bg-charcoal/80 font-semibold cursor-pointer"
       >Join Group</button>
       <button
+        onClick={handleWorkInprogress}
         className=" w-[220px] h-[50px] rounded-2xl bg-charcoal text-white hover:bg-charcoal/80 font-semibold cursor-pointer"
       >Create Group</button>
     </div>

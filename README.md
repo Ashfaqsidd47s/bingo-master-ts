@@ -2,7 +2,7 @@
 
 **An online multiplayer board game blending Bingo and Chess — a perfect middle ground between strategy and simplicity!**
 
-![Game Preview](/frontend/src/assets/mobiless.png)
+![Game Preview](/frontend/src/assets/aibattele.png)
 
 ---
 
@@ -38,10 +38,12 @@ I've always wanted to build something using **WebSockets** — and this game was
 
 Sure, there are tons of tutorials for building games like **chess** or **tic-tac-toe**, but:
 
-* **Chess** requires deeper technical and game knowledge — not everyone can just jump in and play.
+* **Chess** why would someone will play my version of chess if there are multiple opotions out there and  — not everyone can just jump in and play chess you first need to know how to play it .
 * **Tic-tac-toe** is a bit too simple — more like a kid’s game.
 
 **Bingo Master**, though, sits perfectly in the middle. It's strategic but approachable.
+and this was the game that i used to play in my school when we had nothing in classroom we can't even go back to hostels and we dont have mobile phone now what lets play bingo and you wont belive we have filled almost intire notebook at a time just by these bingo boards it was a crase at that time. 
+so its a nostalgic project as well.
 
 > ⚠️ Warning: Long devlog ahead...
 > But if you're here just to play the game, [**click here to start playing!**](#play-now)
@@ -50,12 +52,10 @@ Sure, there are tons of tutorials for building games like **chess** or **tic-tac
 
 ## 🛠️ Tech Stack
 
-I used the **PERN stack**:
-
 * **PostgreSQL** for the database
 * **Express.js** as the server framework
-* **React** for the frontend
 * **Node.js** for the backend
+* **React** for the frontend
 * Everything is written in **TypeScript**
 
 ### WebSockets (Not Socket.IO!)
@@ -78,6 +78,7 @@ Instead of using `socket.io`, which comes with built-in room functionality, I ch
 ## 🎨 The UI Journey
 
 So here's the deal — the original version of this game **worked**, but the **UI was terrible**.
+![ui update](/frontend/src/assets/uishift.png)
 
 When I showed it to friends, their reaction was like:
 
@@ -99,6 +100,8 @@ So I went through **countless Dribbble shots** and mobile game designs. After to
 
 👉 **[Click here to play Bingo Master!](#)**
 *(Insert your live link here)*
+
+![Game Preview](/frontend/src/assets/mobiless.png)
 
 ---
 

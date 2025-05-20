@@ -8,6 +8,7 @@ interface Game {
   cancelInfo: Array<number>;
   cancelCount: number; 
   turn: boolean;
+  isGameOver: boolean;
 }
 
 interface GameStore {

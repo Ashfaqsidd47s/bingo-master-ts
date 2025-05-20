@@ -75,6 +75,9 @@ export default function Game() {
       navigate("/search");
     }
 
+    if(game?.isGameOver){
+      handleClearGame();
+    }
     const handleMessage = (event: MessageEvent) => {
       const message = JSON.parse(event.data);
       console.log(message)
@@ -97,6 +100,7 @@ export default function Game() {
         setCancelInfo(message.payload.cancelInfo)
         setTurn(message.payload.turn)
         setCurrentNumber(message.payload.turn)
+        updateGame(message.payload)
         confetti({
           particleCount: 150, // Lower burst per frame for a smoother effect
           spread: 70,
@@ -114,6 +118,7 @@ export default function Game() {
         setCancelInfo(message.payload.cancelInfo)
         setTurn(message.payload.turn)
         setCurrentNumber(message.payload.turn)
+        updateGame(message.payload)
         openModal(<WinningModal winner={false} />, handleClearGame)
       } else if (message.type === "emoji") {
         setEmoji(message.payload.text);
@@ -122,6 +127,8 @@ export default function Game() {
         }, 5000);
       } else if (message.type === "offline") {
         setIsOponentOnline(false);
+      } else if (message.type === "online") {
+        setIsOponentOnline(true);
       }
     }
 
@@ -130,7 +137,7 @@ export default function Game() {
     return () => {
       removeListener(handleMessage)
     }
-  }, [updateGame, addListener, removeListener, updateOponent, openModal, emoji, navigate])
+  }, [updateGame, addListener, removeListener, updateOponent, openModal, emoji, navigate, game?.isGameOver])
 
   useEffect(() => {
     setBoardInfo(game?.boardInfo || [])
@@ -162,7 +169,7 @@ export default function Game() {
         <div className="w-[100px] flex flex-col gap-2 items-center relative">
           <div className={` w-[70px] h-[70px] center rounded-full overflow-hidden bg-charcoal z-0 ${turn ? 'playing-player' : ''}`}>
             <div className=" w-[67px] h-[67px] rounded-full bg-navy overflow-hidden">
-              <img src={user?.profile_img || "https://avatar.iran.liara.run/public/17"} alt="" />
+              <img src={"https://avatar.iran.liara.run/public/17"} alt="" />
             </div>
           </div>
           <p className=" w-[100px]  truncate text-sm font-semibold ">{user?.name}</p>

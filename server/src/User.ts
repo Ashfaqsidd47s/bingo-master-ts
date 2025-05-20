@@ -1,5 +1,5 @@
 import { WebSocket } from "ws";
-import {CANCLE_NUMBER, JOIN, SEND_EMOJI, SEND_MESSAGE, UserJWTData } from "./Types";
+import {CANCLE_NUMBER, JOIN, SEND_EMOJI, SEND_MESSAGE, SURRENDER, UserJWTData } from "./Types";
 import { GameManager } from "./GameManager";
 
 
@@ -55,15 +55,16 @@ export class User {
                             boardInfo: game.bingo.getMyBoardInfo(playerIndex),
                             canceledInfo: game.bingo.getMyCanceledInfo(playerIndex),
                             cancelCount: game.bingo.getMyCancelCount(playerIndex),
-                            turn: game.bingo.getTurn() === playerIndex
+                            turn: game.bingo.getTurn() === playerIndex,
+                            isGameOver: false
                         }
                     }))
                     GameManager.getInstance().brodcast({
                         type: "online",
                         payload: {
                             userId: this.id,
-                            text: "disonnected",
-                            turn: false
+                            text: "connected back",
+                            turn: game.bingo.getTurn() !== playerIndex,
                         }
                     }, this.id, this.gameId)
                     
@@ -89,7 +90,8 @@ export class User {
                                 boardInfo: game.bingo.getMyBoardInfo(player),
                                 canceledInfo: game.bingo.getMyCanceledInfo(player),
                                 cancelCount: game.bingo.getMyCancelCount(player),
-                                turn: game.bingo.getTurn() === player
+                                turn: game.bingo.getTurn() === player,
+                                isGameOver: false
                             }
                         }))
                         return;
@@ -98,6 +100,7 @@ export class User {
                     const waitingUser = GameManager.getInstance().waitingUser;
                     console.log("waiting id", waitingId)
                     if(waitingId && waitingUser){
+                        if(this.id == waitingId) return;
                         GameManager.getInstance().createNewGame(waitingId, waitingUser, this.id, this)
                         GameManager.getInstance().waitingId = null;
                         GameManager.getInstance().waitingUser = null;
@@ -137,6 +140,28 @@ export class User {
                     }
                     GameManager.getInstance().cancleNumber(this.gameId, number, this.id)
                     break;
+                case SURRENDER: {
+                    const game = GameManager.getInstance().games.get(this.gameId);
+                    if(game){
+                        const otherPlayerId = game.players[0] === this.id ? game.players[1]: game.players[0];
+                        const otherPlayerIdx = game.players[0] === this.id ? 1: 0;
+                        const otherPlayer = GameManager.getInstance().users.get(otherPlayerId)
+                        otherPlayer?.ws.send(JSON.stringify({
+                            type: "winner",
+                            payload: {
+                                boardInfo: game.bingo.getMyBoardInfo(otherPlayerIdx),
+                                canceledInfo: game.bingo.getMyCanceledInfo(otherPlayerIdx),
+                                cancelCount: game.bingo.getMyCancelCount(otherPlayerIdx),
+                                turn: game.bingo.getTurn() === otherPlayerIdx,
+                                isGameOver: true
+                            }
+                        }))
+                        game.isGameOver = true;
+                        GameManager.getInstance().removeGame(game.id);
+                        return;
+                    }
+                    break;
+                }
 
                 case SEND_MESSAGE:
                     if(this.gameId == ""){
@@ -241,6 +266,7 @@ export class User {
                         oponentInfo: game.bingo.getMyBoardInfo((ind + 1)/2),
                         oponentCancelInfo: game.bingo.getMyCanceledInfo((ind + 1)/2),
                         oponentCancelCount: game.bingo.getMyCancelCount((ind + 1)/2),
+                        isGameOver: true
                     }
                 }))
                 gameManager.removeGame(this.gameId);

@@ -31,7 +31,8 @@ export class Game {
                 cancelInfo: this.bingo.getMyCanceledInfo(0),
                 cancelCount: this.bingo.getMyCancelCount(0),
                 text: "you are the first player",
-                turn: true
+                turn: true,
+                isGameOver: false
             }
         }))
         player2Obj?.ws.send(JSON.stringify({
@@ -42,7 +43,8 @@ export class Game {
                 cancelInfo: this.bingo.getMyCanceledInfo(1),
                 cancelCount: this.bingo.getMyCancelCount(1),
                 text: "you are the second player",
-                turn: false
+                turn: false,
+                isGameOver: false
             }
         }))
         
@@ -73,6 +75,7 @@ export class Game {
                         cancelCount: this.bingo.getMyCancelCount(playing),
                         turn: false,
                         number: num,
+                        isGameOver: false
                     }
                 }))
                 GameManager.getInstance().users.get(otherPlayerId)?.ws.send(JSON.stringify({
@@ -83,6 +86,7 @@ export class Game {
                         cancelCount: this.bingo.getMyCancelCount(otherPlayer),
                         turn: true,
                         number: num,
+                        isGameOver: false
                     }
                 }))
             } else {
@@ -100,6 +104,7 @@ export class Game {
                         oponentInfo: this.bingo.getMyBoardInfo(looser),
                         oponentCancelInfo: this.bingo.getMyCanceledInfo(looser),
                         oponentCancelCount: this.bingo.getMyCancelCount(looser),
+                        isGameOver: true
                     }
                 }))
                 GameManager.getInstance().users.get(this.players[looser])?.ws.send(JSON.stringify({
@@ -114,6 +119,7 @@ export class Game {
                         oponentInfo: this.bingo.getMyBoardInfo(winner),
                         oponentCancelInfo: this.bingo.getMyCanceledInfo(winner),
                         oponentCancelCount: this.bingo.getMyCancelCount(winner),
+                        isGameOver: true
                     }
                 }))
 
