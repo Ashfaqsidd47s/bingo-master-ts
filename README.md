@@ -14,7 +14,10 @@
 * [Tech Stack](#-tech-stack)
 * [Key Features](#-key-features)
 * [The UI Journey](#-the-ui-journey)
-* [Play Now](#-play-now)
+* [Play Now](https://bingo-master-ts.vercel.app/)
+
+## bingo master
+[https://bingo-master-ts.vercel.app/](https://bingo-master-ts.vercel.app/)
 
 ---
 
