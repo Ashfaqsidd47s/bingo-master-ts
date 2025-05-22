@@ -16,7 +16,7 @@
 * [The UI Journey](#-the-ui-journey)
 * [Play Now](https://bingo-master-ts.vercel.app/)
 
-## bingo master
+## live url
 [https://bingo-master-ts.vercel.app/](https://bingo-master-ts.vercel.app/)
 
 ---
