@@ -1,7 +1,7 @@
 // src/store/useGameSocketStore.ts
 import { create } from 'zustand'
 
-const SOCKET_URL = 'ws://localhost:8080';
+const SOCKET_URL = 'wss://bingo-master-ts.onrender.com';
 
 type Listener = (event: MessageEvent) => void;
 

@@ -14,7 +14,7 @@ export default function Home() {
     navigate("/aibattle")
   }
   const handleLoginWithGoogle = () => {
-    window.location.href = "http://localhost:8080/auth/google"
+    window.location.href = "https://bingo-master-ts.onrender.com/auth/google"
   }
 
 
