@@ -19,10 +19,6 @@ export class Game {
         const player1Obj = GameManager.getInstance().users.get(player1Id);
         const player2Obj = GameManager.getInstance().users.get(player2Id);
 
-        console.log("Players")
-        console.log(player1Obj?.getInfo())
-        console.log(player2Obj?.getInfo())
-
         player1Obj?.ws.send(JSON.stringify({
             type: "game_started",
             payload: {

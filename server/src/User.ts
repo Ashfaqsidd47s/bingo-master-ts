@@ -98,13 +98,11 @@ export class User {
                     }
                     const waitingId = GameManager.getInstance().waitingId;
                     const waitingUser = GameManager.getInstance().waitingUser;
-                    console.log("waiting id", waitingId)
                     if(waitingId && waitingUser){
                         if(this.id == waitingId) return;
                         GameManager.getInstance().createNewGame(waitingId, waitingUser, this.id, this)
                         GameManager.getInstance().waitingId = null;
                         GameManager.getInstance().waitingUser = null;
-                        console.log("game create with user ")
                     } else {
                         GameManager.getInstance().waitingId = this.id
                         GameManager.getInstance().waitingUser = this

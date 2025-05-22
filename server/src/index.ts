@@ -54,7 +54,6 @@ function authenticateJWT(req: Request, res: Response, next: NextFunction): void 
 
         next();
     } catch (error) {
-        console.log(error)
         res.status(500).json({ message: 'Internal server error'});
     }
 };
@@ -118,12 +117,7 @@ wss.on("connection", async function connection(ws, req) {
     
     ws.on("error", console.error);
     
-    ws.on("message", async (data)=> {
-        const message = JSON.parse(data.toString());
-        // console.log(" message recieved :", message)
-    })
     ws.on("close", async ()=> {
-        // console.log("socket closing...")
         // if the otheruser has alredy left the game then destroy the game and user user as well 
         user.destroy();
         const waitingId = GameManager.getInstance().waitingId;
@@ -140,7 +134,5 @@ wss.on("connection", async function connection(ws, req) {
                 }
             }));
         });
-        // console.log(" active users" , GameManager.getInstance().users.size)
-        // console.log(GameManager.getInstance().games.size)
     })
 })

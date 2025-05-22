@@ -77,7 +77,6 @@ export class GameManager {
 
     public removeGame(gameId: string) {
         this.games.delete(gameId);
-        console.log("game deleted remaining games", this.games.size)
     }
 
 }
