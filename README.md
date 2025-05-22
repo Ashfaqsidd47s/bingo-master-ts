@@ -8,12 +8,38 @@
 
 ## 📌 Table of Contents
 
+* [How to setup project on local ](#how-to-setup)
 * [About the Game](#about-the-game)
 * [Why I Built This](#why-i-built-this)
 * [Tech Stack](#tech-stack)
 * [Key Features](#key-features)
 * [The UI Journey](#the-ui-journey)
 * [Play Now](#play-now)
+
+---
+
+## 🎮 How to setup 
+
+As this repo includes both frontend and backend so you will have to install npm libraries in both folders 
+**frontend setup**
+```
+cd frontend
+```
+```
+npm install 
+```
+
+**for backent**
+```
+cd server
+```
+```
+npm install 
+```
+Create a .env and update it with your postgres database connection details:
+```
+cp .env.sample .env
+```
 
 ---
 
