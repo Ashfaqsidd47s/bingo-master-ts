@@ -53,7 +53,7 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
         })
         res.cookie("token", token, {
             httpOnly: false,
-            secure:  false,
+            secure:  true,
             sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000,
         })
