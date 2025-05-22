@@ -20,7 +20,6 @@ export default function Searching() {
   
 
   const handleFindOponent = () => {
-    console.log(isConnected)
     if( isConnected ) {
       send(JSON.stringify({
         type: "join_game"
@@ -36,7 +35,6 @@ export default function Searching() {
   useEffect(() => {
     const handleMessageInSearching = (event: MessageEvent) => {
       const message = JSON.parse(event.data);
-      console.log(message)
       if(message.type === "waiting"){
         setIsSearching(true)
       } else if(message.type ===  "game_started"){
