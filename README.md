@@ -8,13 +8,13 @@
 
 ## 📌 Table of Contents
 
-* [How to setup project on local ](#how-to-setup)
-* [About the Game](#about-the-game)
-* [Why I Built This](#why-i-built-this)
-* [Tech Stack](#tech-stack)
-* [Key Features](#key-features)
-* [The UI Journey](#the-ui-journey)
-* [Play Now](#play-now)
+* [How to setup project on local ](#-how-to-setup)
+* [About the Game](#-about-the-game)
+* [Why I Built This](#-why-i-built-this)
+* [Tech Stack](#-tech-stack)
+* [Key Features](#-key-features)
+* [The UI Journey](#-the-ui-journey)
+* [Play Now](#-play-now)
 
 ---
 
@@ -29,7 +29,7 @@ cd frontend
 npm install 
 ```
 
-**for backent**
+**for backend**
 ```
 cd server
 ```
