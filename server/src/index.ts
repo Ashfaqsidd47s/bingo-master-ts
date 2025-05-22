@@ -73,26 +73,18 @@ const server = app.listen(process.env.PORT || 8080, ()=> {
 
 // WEB SOCKET SERVER
 const wss = new WebSocketServer({server});
-let count = 0;
 
 wss.on("connection", async function connection(ws, req) {
-    count++;
-    ws.send(JSON.stringify({
-        type:"user_count",
-        payload: {
-            count: count,
-            text:"active users"
-        }
-    }));
-    GameManager.getInstance().users.forEach((user) => {
-        user.ws.send(JSON.stringify({
-            type:"user_count",
+    
+    wss.clients.forEach((client) => {
+        client.send(JSON.stringify({
+            type: "user_count",
             payload: {
-                count: count,
-                text:"active users"
+                count: wss.clients.size,
+                text: "active users"
             }
-        }))
-    })
+        }));
+    });
      
     const cookies = req.headers.cookie;
     let id = "";
@@ -132,7 +124,6 @@ wss.on("connection", async function connection(ws, req) {
     })
     ws.on("close", async ()=> {
         // console.log("socket closing...")
-        count--;
         // if the otheruser has alredy left the game then destroy the game and user user as well 
         user.destroy();
         const waitingId = GameManager.getInstance().waitingId;
@@ -140,15 +131,15 @@ wss.on("connection", async function connection(ws, req) {
             GameManager.getInstance().waitingId = null;
             GameManager.getInstance().waitingUser = null;
         }
-        GameManager.getInstance().users.forEach((user) => {
-            user.ws.send(JSON.stringify({
-                type:"user_count",
+        wss.clients.forEach((client) => {
+            client.send(JSON.stringify({
+                type: "user_count",
                 payload: {
-                    count: count,
-                    text:"active users"
+                    count: wss.clients.size,
+                    text: "active users"
                 }
-            }))
-        })
+            }));
+        });
         // console.log(" active users" , GameManager.getInstance().users.size)
         // console.log(GameManager.getInstance().games.size)
     })

@@ -9,9 +9,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/Popove
 import useGameStore from "../store/gameStore";
 import useUserStore from "../store/userstore";
 import WinningModal from "../components/modals/WinnLoosModal";
-import confetti from "canvas-confetti";
 import { useNavigate } from "react-router";
 import { useGameSocketStore } from "../store/gameSocketStore";
+import { EmojiAttachment } from "../components/EmojiAttachment";
+import { playWinningAnimation } from "../components/Animations";
 
 export default function Game() {
   const navigate = useNavigate();
@@ -101,16 +102,7 @@ export default function Game() {
         setTurn(message.payload.turn)
         setCurrentNumber(message.payload.turn)
         updateGame(message.payload)
-        confetti({
-          particleCount: 150, // Lower burst per frame for a smoother effect
-          spread: 70,
-          startVelocity: 30,
-          decay: 0.95, // Makes particles last longer
-          gravity: 0.7, // Slower fall 
-          shapes: ["square"], // Adds variety
-          colors: ["#FFD700", "#FFEC8B", "#FFF8DC", "#FFFACD", "#FFC300"],
-          origin: { y: 0.9},
-        })
+        playWinningAnimation()
         openModal(<WinningModal winner={true} />, handleClearGame);
       } else if ( message.type === "looser") {
         setBoardInfo(message.payload.boardInfo)
@@ -233,19 +225,7 @@ export default function Game() {
          />
         <div className=" italic text-lg font-semibold"> score - <span className=" font-bold">{cancelCount}/5</span></div>
       </div>
-      <AnimatePresence>
-          {emoji && (
-            <motion.span
-              initial={{ opacity: 0, y: 50, scale: 0 }}
-              animate={{ opacity: 1, y: -50, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0 }}
-              transition={{ duration: 2 }}
-              className=" absolute bottom-8 whitespace-nowrap w-fit text-2xl font-semibold bg-charcoal p-1 px-4 rounded-full"
-            >
-              {emoji}
-            </motion.span>
-          )}
-        </AnimatePresence>
+      <EmojiAttachment emoji={emoji} />
       <motion.div 
         variants={containerVariants}
         initial="hidden"

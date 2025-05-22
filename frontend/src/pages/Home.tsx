@@ -1,17 +1,17 @@
 import { NavLink, useNavigate } from "react-router";
-import Board from "../components/Board";
 import useUserStore from "../store/userstore";
 import googleIcon from "../assets/google.svg"
 import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/Popover";
 import { ChevronDown } from "lucide-react";
 import ActiveUsers from "../components/ActiveUsers";
+import BoardComp from "../components/Board";
 
 export default function Home() {
   const navigate = useNavigate()
   const {isVerifying, user} = useUserStore();
 
   const handelPlayGame = () => {
-    navigate("/playwithai")
+    navigate("/aibattle")
   }
   const handleLoginWithGoogle = () => {
     window.location.href = "http://localhost:8080/auth/google"
@@ -35,7 +35,7 @@ export default function Home() {
         <ActiveUsers className=" absolute top-4 left-4" />
         <div className=" grow center gap-4 justify-between">
           <div className=" w-full h-full  center ">
-            <Board />
+            <BoardComp />
           </div>
           <h1 className=" text-5xl md:text-6xl font-bold">Bingo Master</h1>
           {user && <p> Welcome {user.name }</p>}
@@ -62,7 +62,7 @@ export default function Home() {
         <button 
           className=' flex-none h-[60px] bg-charcoal hover:bg-charcoal/90 text-white  text-xl font-semibold w-full rounded-full shadow-md cursor-pointer'
           onClick={handelPlayGame}
-        >Play With Ai</button>
+        >How to play</button>
         <NavLink to="/aibattle" className=" font-semibold text-white/80 text-lg underline italic hover:text-gray-400">Watch AI bingo battle</NavLink>
       </div>
     </div>
