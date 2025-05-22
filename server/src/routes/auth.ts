@@ -13,7 +13,7 @@ passport.use("google", new GoogleStrategy({
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     callbackURL: process.env.SERVER_URL + "/auth/google/callback",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
-}, async (accessToken: string, refreshToken: string,profile: any, cb: any ) => {
+}, async (accessToken: string, refreshToken: string, profile: any, cb: any ) => {
     try {
         // Query to find an existing user
         const getEmailQuery = `SELECT "id", "name", "email", "profile_img" FROM "users" WHERE "email" = $1`;
