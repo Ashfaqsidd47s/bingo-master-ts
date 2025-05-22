@@ -61,7 +61,7 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
 
     } catch (err) {
         console.log(err)
-        res.redirect("/login")
+        res.redirect(process.env.CLIENT_URL + "/")
     }
     
 })
