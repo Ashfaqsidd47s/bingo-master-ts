@@ -2,8 +2,6 @@
 
 **An online multiplayer board game blending Bingo and Chess — a perfect middle ground between strategy and simplicity!**
 
-![Game Preview](/frontend/src/assets/aibattele.png)
-
 ---
 
 ## 📌 Table of Contents
@@ -18,6 +16,10 @@
 
 ## live url
 [https://bingo-master-ts.vercel.app/](https://bingo-master-ts.vercel.app/)
+
+---
+
+![Game Preview](/frontend/src/assets/aibattele.png)
 
 ---
 
