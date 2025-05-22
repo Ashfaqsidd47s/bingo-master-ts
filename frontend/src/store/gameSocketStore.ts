@@ -1,7 +1,7 @@
 // src/store/useGameSocketStore.ts
 import { create } from 'zustand'
 
-const SOCKET_URL = 'wss://bingo-master-ts.onrender.com';
+const SOCKET_URL = 'ws://localhost:8080';
 
 type Listener = (event: MessageEvent) => void;
 
@@ -41,7 +41,6 @@ export const useGameSocketStore = create<GameSocketStore>((set, get) => {
     socket = new WebSocket(SOCKET_URL);
 
     socket.onopen = () => {
-      console.log('[ZustandSocket] Connected');
       reconnectAttempts = 0;
       set({ isConnected: true });
       flushQueue();
@@ -93,7 +92,6 @@ export const useGameSocketStore = create<GameSocketStore>((set, get) => {
     send: (data: string) => {
       if (socket?.readyState === WebSocket.OPEN) {
         socket.send(data);
-        console.log(listeners)
       } else {
         console.warn('[ZustandSocket] Socket not open. Queuing message.');
         messageQueue.push(data);

@@ -52,9 +52,9 @@ router.get("/google/callback", passport.authenticate("google", {failureRedirect:
             email: req.user.email,
         })
         res.cookie("token", token, {
-            httpOnly: false,
+            httpOnly: true,
             secure:  true,
-            sameSite: "lax",
+            sameSite: "none",
             maxAge: 24 * 60 * 60 * 1000,
         })
         res.redirect(process.env.CLIENT_URL + "/")
