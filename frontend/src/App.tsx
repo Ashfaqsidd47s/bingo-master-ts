@@ -6,10 +6,12 @@ import Game from './pages/Game'
 import AiBattle from './pages/AiBattle'
 import Modal from './components/modals/Modal'
 import Searching from './pages/Searching'
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import useUserStore from './store/userstore'
 import useGameStore from './store/gameStore'
 import { useGameSocketStore } from './store/gameSocketStore'
+
+const Architecture = lazy(() => import('./pages/Architecture'))
 
 function App() {
 
@@ -41,6 +43,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/aibattle' element={<AiBattle />} />
+        <Route path='/architecture' element={<Suspense fallback={null}><Architecture /></Suspense>} />
         <Route path='/search' element={user ? <Searching />:  <Navigate to="/" replace />} />
         <Route path='/game' element={game ? <Game /> : user ? <Navigate to="/search" replace /> : <Navigate to="/" replace />} />
       </Routes>
